@@ -18,7 +18,11 @@
 #' @param p.cens Percentage of censored measurements in the responses. The default value is 0.1.
 #' @param n.cens Number of censored measurements in the responses. The default value is NULL.
 #' @param cens_type The direction of cesoring. Available options are \code{left} and \code{right}.
-#' @param nu_set The values of nu for the student's-t or slash simulated data. The default value is NULL.
+#' @param nu_set degrees of freedom for student's-t or slash simulated data. The default value is NULL.
+#' @return return list:
+#' \item{cc}{Vector of censoring indicators.}
+#' \item{y_cc}{Vector of responses censoring.}
+#' \item{y_origin}{Vector of original complete responses.}
 
 
 
