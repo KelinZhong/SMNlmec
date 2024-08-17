@@ -36,7 +36,10 @@
 #' \item{StanObject}{A Stan object from rstan::stan().}
 #' \item{SelectionCriteria}{A data frame of model selection criteria, including LPML, AIC, BIC and DIC.}
 #' @references TBD
-#' @example TBD
+#' @examples
+#' \dontrun{
+#'
+#' }
 
 
 #### just one arg for data set
@@ -48,8 +51,8 @@
 SMNlmec.est <- function(N_complete, N_cens, N_individuals,
                         beta_length, D_dim, x_set, z_set, tt,
                         y_complete, y_censor, censor_vector, nj_vector,
-                        censor_nj_vector, y_ind, dist == "Normal",
-                        struc == "UNC", direction == "left",
+                        censor_nj_vector, y_ind, dist = "Normal",
+                        struc = "UNC", direction = "left",
                         thin_num = 5, chains_num = 3, iter_num = 5000,
                         burn_percen = 0.2, seed_set = NULL,
                         adapt_delta_set = 0.8) {
