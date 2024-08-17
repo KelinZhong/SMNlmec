@@ -38,6 +38,112 @@
 #' @references TBD
 #' @examples
 #' \dontrun{
+#' require(lmec)
+#' require(rstan)
+#' require(StanHeaders)
+#' require(MASS)
+#' require(tmvtnorm)
+#' require(mvtnorm)
+#' require(mnormt)
+#'
+#' data("UTIdata")
+#' data1 <- UTIdata
+#' data1 <- subset(data1, !is.na(RNA))
+#' subjects <- unique(data1$Patid)
+#' cluster <- c(match(data1$Patid,subjects))
+#' m <- length(subjects)
+#' N <-length(cluster)
+#' y1 <- c(log10(data1$RNA))
+#' cc = (data1$RNAcens==1)+0
+#' x = cbind((data1$Fup==0)+0, (data1$Fup==1)+0, (data1$Fup==3)+0, (data1$Fup==6)+0, (data1$Fup==9)+0, (data1$Fup==12)+0, (data1$Fup==18)+0, (data1$Fup==24)+0)
+#' tem = data1$Fup
+#' nj<- rep(0,m)
+#' for (j in 1:m) {
+#'   nj[j]=sum(cluster==j)
+#' }
+#'
+#' which(nj<3)
+#'
+#' ############################################
+#' # Excluded subject  8,16,34,55,56          #
+#' ############################################
+#'
+#' for(i in c(8,16,34,55,56))
+#' {
+#'   y1[cluster==i]= NA
+#'   x[cluster==i]=NA
+#'   tem[cluster==i]=NA
+#'   cc[cluster==i]=NA
+#'   nj[i]=NA
+#'   cluster[cluster==i]=NA
+#' }
+#'
+#' paciente=data1$Patid
+#' paciente[paciente=="C6"]=NA
+#' paciente[paciente=="T16"]=NA
+#' paciente=as.vector(na.omit(paciente))
+#'
+#'
+#' y1=as.vector(na.omit(y1))
+#' x=as.matrix(na.omit(x))
+#' tem=as.vector(na.omit(tem))
+#' cc=as.vector(na.omit(cc))
+#' nj=as.vector(na.omit(nj))
+#' cluster=as.vector(na.omit(cluster))
+#'
+#' z <- matrix(rep(1, length(y1)), ncol=1)
+#'
+#' ###########################################
+#'
+#' y_com <- as.numeric(y1)
+#' rho_com <- as.numeric(cc)
+#' ycen<- y_com[rho_com==1]
+#'
+#' l_set <- dim(x)[2]
+#' q1_set <- 1
+#'
+#' cens_N <- sum(rho_com)
+#' N_com <- length(y_com)
+#' m_com <- m - 5
+#'
+#' ind_set <- numeric()
+#' log_nj <- 0
+#' for(i in 1:length(nj)){
+#'   for(j in 1:nj[i]){
+#'     ind_set[log_nj + j] <- i
+#'   }
+#'   log_nj <- log_nj + nj[i]
+#' }
+#'
+#' cens_nj <- numeric()
+#' log_nj <- 0
+#' cens_count <- 0
+#'
+#' for(i in 1:length(nj)){
+#'   for(j in 1:nj[i]){
+#'     if(rho_com[log_nj + j]==1) {
+#'       cens_count = cens_count + 1
+#'     }
+#'   }
+#'   log_nj = log_nj + nj[i]
+#'   cens_nj[i] = cens_count
+#'   cens_count <- 0
+#' }
+#'
+#' SMNlmec_T_DEC <- SMNlmec.est(N_complete = N_com, N_cens = cens_N,
+#'                              N_individuals = m_com, beta_length = l_set,
+#'                              D_dim = q1_set, x_set = x, z_set = z, tt = tem,
+#'                              y_complete = y_com, y_censor = ycen,
+#'                              censor_vector = rho_com, nj_vector = nj,
+#'                              censor_nj_vector = cens_nj,
+#'                              y_ind = ind_set, dist = "Student",
+#'                              struc = "DEC", direction = "left",
+#'                              thin_num = 5, chains_num = 3, iter_num = 5000,
+#'                              burn_percen = 0.2, seed_set = 9955,
+#'                              adapt_delta_set = 0.8)
+#'
+#' print(SMNlmec_T_DEC$StanObject,par=c("beta","sigma2","phi1","phi2","D1","nu"), digits = 3)
+#' print(SMNlmec_T_DEC$SelectionCriteria)
 #'
 #' }
 
