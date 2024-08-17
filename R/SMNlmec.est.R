@@ -48,8 +48,8 @@
 SMNlmec.est <- function(N_complete, N_cens, N_individuals,
                         beta_length, D_dim, x_set, z_set, tt,
                         y_complete, y_censor, censor_vector, nj_vector,
-                        censor_nj_vector, y_ind, dist = "Normal",
-                        struc = "UNC", direction = "left",
+                        censor_nj_vector, y_ind, dist == "Normal",
+                        struc == "UNC", direction == "left",
                         thin_num = 5, chains_num = 3, iter_num = 5000,
                         burn_percen = 0.2, seed_set = NULL,
                         adapt_delta_set = 0.8) {
@@ -71,9 +71,9 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
 
 
 
-  if(dist = "Normal") {
-    if(struc = "UNC")   {
-      if(direction = "left") {
+  if(dist == "Normal") {
+    if(struc == "UNC")   {
+      if(direction == "left") {
         stan_obj <- rstan::stan(file='lmm-UNC-N-censored-left.stan',
                          data = list(N_complete = N_com, N_cens=cens_N, N_obs= obs_N,
                                      n = m, l = l_set,yobs=yobs,ycen=ycen,x=x,
@@ -92,7 +92,7 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
 
       }
 
-      if(direction = "right") {
+      if(direction == "right") {
         stan_obj <- rstan::stan(file='lmm-UNC-N-censored-right.stan',
                          data = list(N_complete = N_com, N_cens=cens_N, N_obs= obs_N,
                                      n = m, l = l_set,yobs=yobs,ycen=ycen,x=x,
@@ -109,8 +109,8 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
       }
     }
 
-    if(struc = "DEC")   {
-      if(direction = "left") {
+    if(struc == "DEC")   {
+      if(direction == "left") {
         stan_obj <- rstan::stan(file='lmm-DEC-N-censored-left.stan',
                               data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                           n=m, l=l_set, q1 = q1_set,
@@ -129,7 +129,7 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
                               depstr = "DEC", cens.type="left",LI=NULL, LS=NULL)
       }
 
-      if(direction = "right") {
+      if(direction == "right") {
         stan_obj <- rstan::stan(file='lmm-DEC-N-censored-right.stan',
                          data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                      n=m, l=l_set, q1 = q1_set,
@@ -149,8 +149,8 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
       }
     }
 
-    if(struc = "CAR")   {
-      if(direction = "left") {
+    if(struc == "CAR")   {
+      if(direction == "left") {
         stan_obj <- rstan::stan(file='lmm-CAR-N-censored-left.stan',
                          data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                      n=m, l=l_set, q1 = q1_set,
@@ -169,7 +169,7 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
                                      depstr = "CAR", cens.type="left",LI=NULL, LS=NULL)
       }
 
-      if(direction = "right") {
+      if(direction == "right") {
         stan_obj <- rstan::stan(file='lmm-CAR-N-censored-right.stan',
                          data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                      n=m, l=l_set, q1 = q1_set,
@@ -192,9 +192,9 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
 
   }
 
-  if(dist = "Student") {
-    if(struc = "UNC")   {
-      if(direction = "left") {
+  if(dist == "Student") {
+    if(struc == "UNC")   {
+      if(direction == "left") {
         stan_obj <- rstan::stan(file='lmm-UNC-t-censored-left.stan',
                          data = list(N_complete = N_com, N_cens=cens_N, N_obs= obs_N,
                                      n = m, l = l_set,yobs=yobs,ycen=ycen,x=x,
@@ -209,7 +209,7 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
                               depstr = "UNC", cens.type="left",LI=NULL, LS=NULL)
       }
 
-      if(direction = "right") {
+      if(direction == "right") {
         stan_obj <- rstan::stan(file='lmm-UNC-t-censored-right.stan',
                          data = list(N_complete = N_com, N_cens=cens_N, N_obs= obs_N,
                                      n = m, l = l_set,yobs=yobs,ycen=ycen,x=x,
@@ -225,8 +225,8 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
       }
     }
 
-    if(struc = "DEC")   {
-      if(direction = "left") {
+    if(struc == "DEC")   {
+      if(direction == "left") {
         stan_obj <- rstan::stan(file='lmm-DEC-t-censored-left.stan',
                               data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                           n=m, l=l_set, q1 = q1_set,
@@ -244,7 +244,7 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
                               depstr = "DEC", cens.type="left",LI=NULL, LS=NULL)
       }
 
-      if(direction = "right") {
+      if(direction == "right") {
         stan_obj <- rstan::stan(file='lmm-DEC-t-censored-right.stan',
                          data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                      n=m, l=l_set, q1 = q1_set,
@@ -263,8 +263,8 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
       }
     }
 
-    if(struc = "CAR")   {
-      if(direction = "left") {
+    if(struc == "CAR")   {
+      if(direction == "left") {
         stan_obj <- rstan::stan(file='lmm-CAR-t-censored-UTI.stan',
                               data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                           n=m, l=l_set, q1 = q1_set,
@@ -282,7 +282,7 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
                               depstr = "CAR", cens.type="left",LI=NULL, LS=NULL)
       }
 
-      if(direction = "right") {
+      if(direction == "right") {
         stan_obj <- rstan::stan(file='lmm-CAR-t-censored-right.stan',
                          data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                      n=m, l=l_set, q1 = q1_set,
@@ -303,9 +303,9 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
 
   }
 
-  if(dist = "Slash") {
-    if(struc = "UNC")   {
-      if(direction = "left") {
+  if(dist == "Slash") {
+    if(struc == "UNC")   {
+      if(direction == "left") {
         stan_obj <- rstan::stan(file='lmm-UNC-SL-censored-left.stan',
                                data = list(N_complete = N_com, N_cens=cens_N, N_obs= obs_N,
                                            n = m, l = l_set,yobs=yobs,ycen=ycen,x=x,
@@ -321,7 +321,7 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
 
       }
 
-      if(direction = "right") {
+      if(direction == "right") {
         stan_obj <- rstan::stan(file='lmm-UNC-SL-censored-right.stan',
                          data = list(N_complete = N_com, N_cens=cens_N, N_obs= obs_N,
                                      n = m, l = l_set,yobs=yobs,ycen=ycen,x=x,
@@ -338,8 +338,8 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
       }
     }
 
-    if(struc = "DEC")   {
-      if(direction = "left") {
+    if(struc == "DEC")   {
+      if(direction == "left") {
         stan_obj <- rstan::stan(file='lmm-DEC-SL-censored-left.stan',
                                data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                            n=m, l=l_set, q1 = q1_set,
@@ -357,7 +357,7 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
                                depstr = "DEC", cens.type="left",LI=NULL, LS=NULL)
       }
 
-      if(direction = "right") {
+      if(direction == "right") {
         stan_obj <- rstan::stan(file='lmm-DEC-SL-censored-right.stan',
                          data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                      n=m, l=l_set, q1 = q1_set,
@@ -376,8 +376,8 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
       }
     }
 
-    if(struc = "CAR")   {
-      if(direction = "left") {
+    if(struc == "CAR")   {
+      if(direction == "left") {
         stan_obj <- rstan::stan(file='lmm-CAR-SL-censored-left.stan',
                                data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                            n=m, l=l_set, q1 = q1_set,
@@ -395,7 +395,7 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
                                depstr = "CAR", cens.type="left",LI=NULL, LS=NULL)
       }
 
-      if(direction = "right") {
+      if(direction == "right") {
         stan_obj <- rstan::stan(file='lmm-CAR-SL-censored-right.stan',
                          data = list(N_complete = N_com, N_cens = cens_N, ycen=ycen,
                                      n=m, l=l_set, q1 = q1_set,
