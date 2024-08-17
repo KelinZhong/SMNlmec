@@ -70,7 +70,7 @@ SMNlmec.est <- function(N_complete, N_cens, N_individuals,
   y_com <- y_complete
   ycen <- y_censor
   nj <- nj_vector
-  cens_nj <-
+  cens_nj <- censor_nj_vector
 
 
 
