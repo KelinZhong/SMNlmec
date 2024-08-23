@@ -79,8 +79,15 @@ SMNlmec.est(
 }
 \value{
 Return a list of Stan object and a data frame of model selection criteria:
-\item{StanObject}{A Stan object from rstan::stan().}
-\item{SelectionCriteria}{A data frame of model selection criteria, including LPML, AIC, BIC and DIC.}
+\item{StanObject}{A Stan object from rstan::stan().
+\code{beta} Estimations of fixed effects.
+\code{sigma2} Estimation of scalar of covariance matrix of random error.
+\code{phi1} Estimation of phi1 in \code{DEC} or \code{CAR} structure; not applicable for \code{UNC} structure.
+\code{phi2} Estimation of phi2 in \code{DEC} structure; not applicable for \code{UNC} and \code{CAR} structure.
+\code{D1} Estimation of covariance matrix of random effects.
+\code{nu} Esimation of degree of freedom for \code{Student} and \code{Slash} distribution; not applicable for \code{Normal} distribution.
+}
+\item{SelectionCriteria}{A data frame of model selection criteria, including LPML, EAIC, EBIC and DIC.}
 }
 \description{
 This function fits left, right censored mixed-effects linear model, with scale mixture of normal distribution errors, using the Stan. It returns estimates, standard errors and LPML, AIC, BIC and DIC.
