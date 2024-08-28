@@ -8,7 +8,7 @@ Author@R: c(
   person("Luis M.","Castro", email = "lmcastro@uc.cl", role = c("aut")),
   person("Victor H.","Lachos", email = "hlachos@uconn.edu", role = c("aut")),
   person("Jalmar M.F.","Carrasco", email = "carrascojalmar@gmail.com", role = c("cre")))
-Maintainer: Jalmar M.F. Carrasco <carrascojalmar@gmail.com>
+Maintainer: Kelin Zhong <kelin.zhong@uconn.edu>, Jalmar M.F. Carrasco <carrascojalmar@gmail.com>
 Description: Fitting censored longitudinal data with linear mixed-effects model with scale mixture of normal distribution (normal, student's-t, slash) and damped exponential correlated (DEC), damped exponential correlated with AR(1) (CAR) and conditional uncorrelated (UNC) structure for random error. Support left and right censoring.
 Depends: R (>= 4.2.2)
 Imports: 
