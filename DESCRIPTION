@@ -1,11 +1,25 @@
 Package: SMNlmec
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Scale mixture of normal distribution in linear mixed-effects censored model with UNC, DEC, CAR correaltion structure
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author@R: c(
+  person("Kelin","Zhong", email = "kelin.zhong@uconn.edu", role = c("aut","cre")),
+  person("Fernanda L.","Schumacher", email = "schumacher.313@osu.edu", role = c("aut")),
+  person("Luis M.","Castro", email = "lmcastro@uc.cl", role = c("aut")),
+  person("Victor H.","Lachos", email = "hlachos@uconn.edu", role = c("aut")),
+  person("Jalmar M.F.","Carrasco", email = "carrascojalmar@gmail.com", role = c("cre")))
+Maintainer: Jalmar M.F. Carrasco <carrascojalmar@gmail.com>
+Description: Fitting censored longitudinal data with linear mixed-effects model with scale mixture of normal distribution (normal, student's-t, slash) and damped exponential correlated (DEC), damped exponential correlated with AR(1) (CAR) and conditional uncorrelated (UNC) structure for random error. Support left and right censoring.
+Depends: R (>= 4.2.2)
+Imports: 
+  rstan (>= 2.26.23), 
+  StanHeaders (>= 2.26.28), 
+  MASS (>= 7.3-60), 
+  tmvtnorm (>= 1.5), 
+  mvtnorm (>= 1.2-3), 
+  mnormt (>= 2.1.1)
+URL: https://github.com/KelinZhong/SMNlmec
+BugReports: https://github.com/KelinZhong/SMNlmec/issues
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
