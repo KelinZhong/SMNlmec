@@ -44,7 +44,7 @@
 #' \code{nu} Esimation of degree of freedom for \code{Student} and \code{Slash} distribution; not applicable for \code{Normal} distribution.
 #' }
 #' \item{SelectionCriteria}{A data frame of model selection criteria, including LPML, EAIC, EBIC and DIC.}
-#' @references TBD
+#' @references Bayesian analysis of censored linear mixed-effects models for  heavy-tailed  irregularly observed repeated measures (Under review)
 #' @examples
 #' require(rstan)
 #' require(StanHeaders)
@@ -104,7 +104,7 @@
 #'
 #' y_com <- as.numeric(y1)
 #' rho_com <- as.numeric(cc)
-#' ycen<- y_com[rho_com==1]
+#' ycen <- y_com[rho_com==1]
 #'
 #' l_set <- dim(x)[2]
 #' q1_set <- 1
