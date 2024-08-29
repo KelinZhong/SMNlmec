@@ -100,8 +100,8 @@ require(tmvtnorm)
 require(mvtnorm)
 require(mnormt)
 
-data("UTIdata")
-data1 <- UTIdata
+data("UTIdata_sub")
+data1 <- UTIdata_sub
 data1 <- subset(data1, !is.na(RNA))
 subjects <- unique(data1$Patid)
 cluster <- c(match(data1$Patid,subjects))
@@ -116,38 +116,9 @@ for (j in 1:m) {
   nj[j] <- sum(cluster==j)
 }
 
-which(nj<3)
-
-############################################
-# Excluded subject  8,16,34,55,56          #
-############################################
-
-for(i in c(8,16,34,55,56))
-{
-  y1[cluster==i] <- NA
-  x[cluster==i] <- NA
-  tem[cluster==i] <- NA
-  cc[cluster==i] <- NA
-  nj[i] <- NA
-  cluster[cluster==i] <- NA
-}
-
-paciente=data1$Patid
-paciente[paciente=="C6"] <- NA
-paciente[paciente=="T16"] <- NA
-paciente=as.vector(na.omit(paciente))
-
-
-y1 <- as.vector(na.omit(y1))
-x <- as.matrix(na.omit(x))
-tem <- as.vector(na.omit(tem))
-cc <- as.vector(na.omit(cc))
-nj <- as.vector(na.omit(nj))
-cluster <- as.vector(na.omit(cluster))
-
 z <- matrix(rep(1, length(y1)), ncol=1)
 
-###########################################
+####### extract inputs for the SMNlmec.est()
 
 y_com <- as.numeric(y1)
 rho_com <- as.numeric(cc)
@@ -158,7 +129,7 @@ q1_set <- 1
 
 cens_N <- sum(rho_com)
 N_com <- length(y_com)
-m_com <- m - 5
+m_com <- m
 
 ind_set <- numeric()
 log_nj <- 0
