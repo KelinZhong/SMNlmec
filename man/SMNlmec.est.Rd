@@ -102,7 +102,6 @@ require(mnormt)
 
 data("UTIdata_sub")
 data1 <- UTIdata_sub
-data1 <- subset(data1, !is.na(RNA))
 subjects <- unique(data1$Patid)
 cluster <- c(match(data1$Patid,subjects))
 m <- length(subjects)
