@@ -26,6 +26,7 @@
 #' \item{cc}{Vector of censoring indicators.}
 #' \item{y_cc}{Vector of responses censoring.}
 #' \item{y_origin}{Vector of original complete responses.}
+#' @export
 
 
 

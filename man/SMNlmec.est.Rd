@@ -78,16 +78,11 @@ SMNlmec.est(
 \item{adapt_delta_set}{A parameter to control the sampler's behavior. The default is 0.8. See rstan::stan() for more details.}
 }
 \value{
-Return a list of Stan object and a data frame of model selection criteria:
-\item{StanObject}{A Stan object from rstan::stan().
-\code{beta} Estimations of fixed effects.
-\code{sigma2} Estimation of scalar of covariance matrix of random error.
-\code{phi1} Estimation of phi1 in \code{DEC} or \code{CAR} structure; not applicable for \code{UNC} structure.
-\code{phi2} Estimation of phi2 in \code{DEC} structure; not applicable for \code{UNC} and \code{CAR} structure.
-\code{D1} Estimation of covariance matrix of random effects.
-\code{nu} Esimation of degree of freedom for \code{Student} and \code{Slash} distribution; not applicable for \code{Normal} distribution.
-}
-\item{SelectionCriteria}{A data frame of model selection criteria, including LPML, EAIC, EBIC and DIC.}
+Return a S4 class SMNlmecfit object. Using function \code{SMNlmec.summary()} to obtain the estimation of parameters and model selection criteria. The SMNlmecfit include:
+\item{stan_object}{A stanfit object from rstan::stan().}
+\item{model_criteria}{A data frame includes LPML, DIC, EAIC, EBIC.}
+\item{dist_set}{The setting of distribution of the stan model.}
+\item{struc_set}{The setting of correlation structure of the stan model.}
 }
 \description{
 This function fits left, right censored mixed-effects linear model, with scale mixture of normal distribution errors, using the Stan. It returns estimates, standard errors and LPML, AIC, BIC and DIC.
@@ -162,12 +157,11 @@ UTI_T_DEC <- SMNlmec.est(N_complete = N_com, N_cens = cens_N,
                              censor_nj_vector = cens_nj,
                              y_ind = ind_set, dist = "Student",
                              struc = "DEC", direction = "left",
-                             thin_num = 5, chains_num = 3, iter_num = 5000,
+                             thin_num = 1, chains_num = 3, iter_num = 3000,
                              burn_percen = 0.2, seed_set = 9955,
                              adapt_delta_set = 0.8)
 
-print(UTI_T_DEC$StanObject,par=c("beta","sigma2","phi1","phi2","D1","nu"), digits = 3)
-print(UTI_T_DEC$SelectionCriteria)
+SMNlmec.summary(UTI_T_DEC)
 
 }
 \references{
