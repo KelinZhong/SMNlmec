@@ -248,7 +248,8 @@ MMsimu.mod=function(m,x,z,tt,nj,beta,sigmae,D,phi,struc,typeModel,percCensu,nive
     }
   }
 
-  return(list(cc=cc, y_cc=y_cc, y_origin = yy))
+  # return(list(cc=cc, y_cc=y_cc, y_origin = yy))
+  return(list(cc=cc, y_cc=y_cc))
 }
 
 
