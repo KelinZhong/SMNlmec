@@ -2,7 +2,6 @@
 
 
 #' @title Generating Censored UNC, DEC, CAR errors with Mixed Effects, for normal, student's-t and slash distribution.
-#' @import lmec
 #' @import MASS
 #' @import tmvtnorm
 #' @import mvtnorm
