@@ -41,6 +41,8 @@
 #' \item{struc_set}{The setting of correlation structure of the stan model.}
 #' @references Bayesian analysis of censored linear mixed-effects models for  heavy-tailed  irregularly observed repeated measures (Under review)
 #' @examples
+#'
+#' \donttest{
 #' require(rstan)
 #' require(StanHeaders)
 #' require(MASS)
@@ -115,6 +117,7 @@
 #'                              adapt_delta_set = 0.8)
 #'
 #' SMNlmec.summary(UTI_T_DEC)
+#' }
 #'
 #' @export
 

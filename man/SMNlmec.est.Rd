@@ -88,6 +88,8 @@ Return a S4 class SMNlmecfit object. Using function \code{SMNlmec.summary()} to 
 This function fits left, right censored mixed-effects linear model, with scale mixture of normal distribution errors, using the Stan. It returns estimates, standard errors and LPML, AIC, BIC and DIC.
 }
 \examples{
+
+\donttest{
 require(rstan)
 require(StanHeaders)
 require(MASS)
@@ -162,6 +164,7 @@ UTI_T_DEC <- SMNlmec.est(N_complete = N_com, N_cens = cens_N,
                              adapt_delta_set = 0.8)
 
 SMNlmec.summary(UTI_T_DEC)
+}
 
 }
 \references{

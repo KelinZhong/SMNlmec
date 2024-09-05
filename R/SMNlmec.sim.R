@@ -48,8 +48,11 @@
 #'                       cens_type="right",nu_set=nu)
 #'
 #' head(Slash_DEC_sim$cc)
+#' sum(Slash_DEC_sim$cc)/length(Slash_DEC_sim$cc)
+#'
 #' head(Slash_DEC_sim$y_cc)
 #'
+#'\donttest{
 #' y_com <- as.numeric(Slash_DEC_sim$y_cc)
 #' rho_com <- as.numeric(Slash_DEC_sim$cc)
 #' ycen <- y_com[rho_com == 1]
@@ -88,11 +91,13 @@
 #'                              censor_nj_vector = cens_nj,
 #'                              y_ind = ind_set, dist = "Slash",
 #'                              struc = "DEC", direction = "right",
-#'                              thin_num = 1, chains_num = 3, iter_num = 1500,
+#'                              thin_num = 1, chains_num = 1, iter_num = 1000,
 #'                              burn_percen = 0.1, seed_set = 9955,
 #'                              adapt_delta_set = 0.8)
 #'
 #' SMNlmec.summary(Slash_DEC_est)
+#' }
+#'
 #' @export
 
 
