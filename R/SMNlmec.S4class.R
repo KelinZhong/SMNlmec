@@ -6,7 +6,7 @@ setClass(
   Class = "SMNlmecfit",
   representation(
     stan_object = "stanfit",
-    model_criteria = "data.frame",
+    model_criteria = "list",
     dist_set = "character",
     struc_set = "character"
   )
@@ -20,8 +20,8 @@ SMNlmecfit.creator <- function(stan_object, model_criteria, dist_set, struc_set)
     stop("stan_object must be a stanfit from rstan package.")
   }
 
-  if(!is.data.frame(model_criteria)){
-    stop("model_criteria must be a data frame.")
+  if(!is.list(model_criteria)){
+    stop("model_criteria must be a list.")
   }
 
   if(!is.character(dist_set) || length(dist_set) != 1) {

@@ -80,7 +80,7 @@ SMNlmec.est(
 \value{
 Return a S4 class SMNlmecfit object. Using function \code{SMNlmec.summary()} to obtain the estimation of parameters and model selection criteria. The SMNlmecfit include:
 \item{stan_object}{A stanfit object from rstan::stan().}
-\item{model_criteria}{A data frame includes LPML, DIC, EAIC, EBIC, K-L divergence.}
+\item{model_criteria}{A list includes LPML, DIC, EAIC, EBIC, K-L divergence.}
 \item{dist_set}{The setting of distribution of the stan model.}
 \item{struc_set}{The setting of correlation structure of the stan model.}
 }
