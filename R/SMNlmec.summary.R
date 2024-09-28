@@ -3,7 +3,7 @@
 #' @title Get a summary of results from SMNlmec.est.
 #' @import rstan
 #' @param object An object of class \code{SMNlmecfit}.
-#' @examples 
+#' @examples
 #' See the example in SMNlmec.est.
 #' @exportMethod SMNlmec.summary
 setMethod("SMNlmec.summary","SMNlmecfit",function(object){
@@ -11,58 +11,60 @@ setMethod("SMNlmec.summary","SMNlmecfit",function(object){
   temp_struc <- object@struc_set
   temp_model <- object@stan_object
   temp_criteria <- object@model_criteria
-  
+  crit <- as.data.frame(cbind(temp_criteria$LPML,temp_criteria$DIC,temp_criteria$EAIC,temp_criteria$EBIC))
+  colnames(crit) <- c("LPML","DIC","EAIC","EBIC")
+
   if(temp_dist == "Normal") {
-    
+
     if(temp_struc == "UNC") {
       print(temp_model,par=c("beta","sigma2","sigmab2"), digits = 3)
-      print(temp_criteria)
+      print(crit)
     }
-    
+
     if(temp_struc == "DEC") {
       print(temp_model,par=c("beta","sigma2","phi1","phi2","D1"), digits = 3)
-      print(temp_criteria)
+      print(crit)
     }
-    
+
     if(temp_struc == "CAR") {
       print(temp_model,par=c("beta","sigma2","phi1","D1"), digits = 3)
-      print(temp_criteria)
+      print(crit)
     }
   }
-  
+
   if(temp_dist == "Student") {
-    
+
     if(temp_struc == "UNC") {
       print(temp_model,par=c("beta","sigma2","sigmab2","nu"), digits = 3)
-      print(temp_criteria)
+      print(crit)
     }
-    
+
     if(temp_struc == "DEC") {
       print(temp_model,par=c("beta","sigma2","phi1","phi2","D1","nu"), digits = 3)
-      print(temp_criteria)
+      print(crit)
     }
-    
+
     if(temp_struc == "CAR") {
       print(temp_model,par=c("beta","sigma2","phi1","D1","nu"), digits = 3)
-      print(temp_criteria)
+      print(crit)
     }
   }
-  
+
   if(temp_dist == "Slash") {
-    
+
     if(temp_struc == "UNC") {
       print(temp_model,par=c("beta","sigma2","sigmab2","nu"), digits = 3)
-      print(temp_criteria)
+      print(crit)
     }
-    
+
     if(temp_struc == "DEC") {
       print(temp_model,par=c("beta","sigma2","phi1","phi2","D1","nu"), digits = 3)
-      print(temp_criteria)
+      print(crit)
     }
-    
+
     if(temp_struc == "CAR") {
       print(temp_model,par=c("beta","sigma2","phi1","D1","nu"), digits = 3)
-      print(temp_criteria)
+      print(crit)
     }
   }
 })
