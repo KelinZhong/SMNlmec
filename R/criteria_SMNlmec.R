@@ -648,10 +648,7 @@ criteria<-function(cc, nj, y, x, z, tt, espac=5, stanobj, distr="Normal", depstr
 
   IL<- -log(1/(apply(CPOaux,1,mean)))+ apply(log(Loglikaux),1,mean)
 
-  select_crit <- as.data.frame(cbind(CPO,DIC,EAIC,EBIC,IL))
-  colnames(select_crit) <- c("LPML","DIC","EAIC","EBIC", "KL")
-
-  return(select_crit)
+  return(list("LPML" = CPO, "DIC" = DIC, "EAIC" = EAIC, "EBIC" = EBIC, "KL" = IL))
 
 }
 

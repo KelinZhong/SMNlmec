@@ -1,10 +1,10 @@
 
 #' @title Sub data set for Unstructured Treatment Interruption Study
-#' @description Data set from a study of Unstructured Treatment Interruption in HIV-infected adolescents in four institutions in the US. The main outcome is the HIV-1 RNA viral load, which is subject to censoring below the lower limit of detection of the assay (50 copies/mL). The censored observations are indicated by the variable RNAcens. Excluding subjects whose observations are less than 3 and with missing RNA (excluding subject ID C16 C6 SD12 T16 T17).
+#' @description Data set from a study of Unstructured Treatment Interruption in HIV-infected adolescents in four institutions in the US. The main outcome is the HIV-1 RNA viral load, which is subject to censoring below the lower limit of detection of the assay (50 copies/mL). The censored observations are indicated by the variable RNAcens. Excluding subjects whose observations are less than 2 and with missing RNA (excluding subject ID C6 T16).
 #' @usage data(UTIdata_sub)
 #' @format
 #' \describe{
-#'  A data frame with 354 observations on the following 5 variables.
+#'  A data frame with 360 observations on the following 5 variables.
 #'  \item{Patid}{patient ID}
 #'  \item{Days.after.TI}{days after treatment interruption.}
 #'  \item{Fup}{follow-up months}
