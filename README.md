@@ -5,6 +5,8 @@ Consequently, in this paper, we propose a Bayesian analysis of censored linear m
 
 To install this package from this repo, please input the following command in R.
 
+```r
 library(devtools)
 
 devtools::install_github("KelinZhong/SMNlmec")
+```
