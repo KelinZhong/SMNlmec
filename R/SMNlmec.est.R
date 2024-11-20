@@ -11,20 +11,12 @@
 #' @import mvtnorm
 #' @import mnormt
 #' @description This function fits left, right censored mixed-effects linear model, with scale mixture of normal distribution errors, using the Stan. It returns estimates, standard errors and LPML, AIC, BIC and DIC.
-#' @param N_complete Total number of observations \code{N} in the response vector.
-#' @param N_cens Total number of censored observations \code{N_cens} in response vector.
-#' @param N_individuals Total number of subjects \code{n} in the data.
-#' @param beta_length Value of p in the the \code{1 x p} coefficient vector.
-#' @param D_dim Dimension of the \code{d x d} variance matrix of the random error.
+#' @param ID Vector \code{N x 1} of the ID of the data set, specifying the ID for each measurement.
 #' @param x_set Design matrix of the fixed effects of order \code{N x p}.
 #' @param z_set Design matrix of the random effects of order \code{N x d}.
-#' @param tt Vector \code{1 x N} with the time the measurements were made, where \code{N} is the total number of measurements for all individuals. Default it's considered regular times.
+#' @param tt Vector \code{N x 1} with the time the measurements were made, where \code{N} is the total number of measurements for all individuals. Default it's considered regular times.
 #' @param y_complete Vector \code{1 x N} of the complete responses.
-#' @param y_censor Vector \code{1 x N_cens} of the censored responses in the complete responses.
 #' @param censor_vector Vector \code{1 x N} of the indicator vector of censored responses.
-#' @param nj_vector Vector \code{1 x n} of the number of responses for each individual.
-#' @param censor_nj_vector Vector \code{1 x n} of the number of censored responses for each individual.
-#' @param y_ind Vector \code{1 x N} to show which subject does a specific response belong to.
 #' @param dist Distribution of the random effects and random error. Available options are \code{Normal}, \code{Student} and \code{Slash}.
 #' @param struc Structure of the correlation structure. Available options are \code{UNC}, \code{DEC}, \code{CAR}.
 #' @param direction Direction of censoring type. Available options are \code{left} and \code{right}.
@@ -52,69 +44,20 @@
 #'
 #' data("UTIdata_sub")
 #' data1 <- UTIdata_sub
-#' subjects <- unique(data1$Patid)
-#' cluster <- c(match(data1$Patid,subjects))
-#' m <- length(subjects)
-#' N <-length(cluster)
 #' y1 <- c(log10(data1$RNA))
 #' cc <- (data1$RNAcens==1)+0
+#' y_com<-as.numeric(y1)
+#' rho_com<-as.numeric(cc)
 #' x <- cbind((data1$Fup==0)+0, (data1$Fup==1)+0, (data1$Fup==3)+0, (data1$Fup==6)+0, (data1$Fup==9)+0, (data1$Fup==12)+0, (data1$Fup==18)+0, (data1$Fup==24)+0)
-#' tem <- data1$Fup
-#' nj<- rep(0,m)
-#' for (j in 1:m) {
-#'   nj[j] <- sum(cluster==j)
-#' }
-#'
 #' z <- matrix(rep(1, length(y1)), ncol=1)
 #'
-#' ####### extract inputs for the SMNlmec.est()
-#'
-#' y_com <- as.numeric(y1)
-#' rho_com <- as.numeric(cc)
-#' ycen <- y_com[rho_com==1]
-#'
-#' l_set <- dim(x)[2]
-#' q1_set <- 1
-#'
-#' cens_N <- sum(rho_com)
-#' N_com <- length(y_com)
-#' m_com <- m
-#'
-#' ind_set <- numeric()
-#' log_nj <- 0
-#' for(i in 1:length(nj)){
-#'   for(j in 1:nj[i]){
-#'     ind_set[log_nj + j] <- i
-#'   }
-#'   log_nj <- log_nj + nj[i]
-#' }
-#'
-#' cens_nj <- numeric()
-#' log_nj <- 0
-#' cens_count <- 0
-#'
-#' for(i in 1:length(nj)){
-#'   for(j in 1:nj[i]){
-#'     if(rho_com[log_nj + j]==1) {
-#'       cens_count = cens_count + 1
-#'     }
-#'   }
-#'   log_nj <- log_nj + nj[i]
-#'   cens_nj[i] <- cens_count
-#'   cens_count <- 0
-#' }
-#'
-#' UTI_T_DEC <- SMNlmec.est(N_complete = N_com, N_cens = cens_N,
-#'                              N_individuals = m_com, beta_length = l_set,
-#'                              D_dim = q1_set, x_set = x, z_set = z, tt = tem,
-#'                              y_complete = y_com, y_censor = ycen,
-#'                              censor_vector = rho_com, nj_vector = nj,
-#'                              censor_nj_vector = cens_nj,
-#'                              y_ind = ind_set, dist = "Student",
-#'                              struc = "DEC", direction = "left",
-#'                              thin_num = 1, chains_num = 3, iter_num = 3000,
-#'                              burn_percen = 0.2, seed_set = 9955,
-#'                              adapt_delta_set = 0.8)
+#' UTI_T_DEC <- SMNlmec.est(ID = data1$Patid, x_set = x, z_set = z,
+#'                          tt = data1$Fup, y_complete = y_com,
+#'                          censor_vector = rho_com, dist = "Student",
+#'                          struc = "DEC", direction = "left",
+#'                          thin_num = 1, chains_num = 1, iter_num = 3000,
+#'                          burn_percen = 0.1, seed_set = 9955,
+#'                          adapt_delta_set = 0.8)
 #'
 #' SMNlmec.summary(UTI_T_DEC)
 #' }
@@ -122,30 +65,59 @@
 #' @export
 
 
-SMNlmec.est <- function(N_complete, N_cens, N_individuals,
-                        beta_length, D_dim, x_set, z_set, tt,
-                        y_complete, y_censor, censor_vector, nj_vector,
-                        censor_nj_vector, y_ind, dist = "Normal",
+SMNlmec.est <- function(ID, x_set, z_set, tt, y_complete,
+                        censor_vector, dist = "Normal",
                         struc = "UNC", direction = "left",
-                        thin_num = 5, chains_num = 3, iter_num = 5000,
-                        burn_percen = 0.2, seed_set = NULL,
+                        thin_num = 1, chains_num = 1, iter_num = 3000,
+                        burn_percen = 0.1, seed_set = NULL,
                         adapt_delta_set = 0.8) {
 
-  N_com <- N_complete
-  cens_N <- N_cens
-  obs_N <- N_com - cens_N
-  m <- N_individuals
-  l_set <- beta_length
+  y_com <- y_complete
   rho_com <- censor_vector
-  ind_set <- y_ind
-  q1_set <- D_dim
   x <- x_set
   z <- z_set
-  y_com <- y_complete
-  ycen <- y_censor
-  nj <- nj_vector
-  cens_nj <- censor_nj_vector
 
+  subjects <- unique(ID)
+  cluster <- c(match(ID,subjects))
+  m <- length(subjects)
+  N_com <-length(cluster)
+  cens_N <- sum(rho_com)
+  obs_N <- N_com - cens_N
+
+  l_set <- dim(x)[2]
+  q1_set <- dim(z)[2]
+  ycen <- y_com[rho_com == 1]
+  yobs <- y_com[rho_com == 0]
+
+  nj<- rep(0,m)
+  for(j in 1:m) {
+    nj[j] <- sum(cluster == j)
+  }
+
+  ind_set<-numeric()
+  log_nj<-0
+
+  for(i in 1:length(nj)) {
+    for(j in 1:nj[i]){
+      ind_set[log_nj+j] <- i
+    }
+    log_nj <- log_nj + nj[i]
+  }
+
+  cens_nj <- numeric()
+  log_nj <- 0
+  cens_count <- 0
+
+  for(i in 1:length(nj)) {
+    for(j in 1:nj[i]){
+      if(rho_com[log_nj+j] == 1) {
+        cens_count <- cens_count+1
+      }
+    }
+    log_nj <- log_nj + nj[i]
+    cens_nj[i] <- cens_count
+    cens_count <- 0
+  }
 
 
   if(dist == "Normal") {
