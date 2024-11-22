@@ -31,9 +31,8 @@
 #' \item{model_criteria}{A list includes LPML, DIC, EAIC, EBIC, K-L divergence.}
 #' \item{dist_set}{The setting of distribution of the stan model.}
 #' \item{struc_set}{The setting of correlation structure of the stan model.}
-#' @references Bayesian analysis of censored linear mixed-effects models for  heavy-tailed  irregularly observed repeated measures (Under review)
+#' @references Kelin Zhong, Fernanda L. Schumacher, Luis M. Castro and Victor H. Lachos. Bayesian analysis of censored linear mixed-effects models for heavy-tailed  irregularly observed repeated measures. Statistics in Medicine, 2025. doi:10.1002/sim.10295
 #' @examples
-#'
 #' \donttest{
 #' require(rstan)
 #' require(StanHeaders)
@@ -48,7 +47,16 @@
 #' cc <- (data1$RNAcens==1)+0
 #' y_com<-as.numeric(y1)
 #' rho_com<-as.numeric(cc)
-#' x <- cbind((data1$Fup==0)+0, (data1$Fup==1)+0, (data1$Fup==3)+0, (data1$Fup==6)+0, (data1$Fup==9)+0, (data1$Fup==12)+0, (data1$Fup==18)+0, (data1$Fup==24)+0)
+#' x <- cbind(
+#'  (data1$Fup==0)+0,
+#'  (data1$Fup==1)+0,
+#'  (data1$Fup==3)+0,
+#'  (data1$Fup==6)+0,
+#'  (data1$Fup==9)+0,
+#'  (data1$Fup==12)+0,
+#'  (data1$Fup==18)+0,
+#'  (data1$Fup==24)+0
+#'  )
 #' z <- matrix(rep(1, length(y1)), ncol=1)
 #'
 #' UTI_T_DEC <- SMNlmec.est(ID = data1$Patid, x_set = x, z_set = z,

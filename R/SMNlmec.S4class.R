@@ -1,7 +1,8 @@
 
 #' @import rstan
 
-#' @export
+#' @docType class
+#' @exportClass SMNlmecfit
 setClass(
   Class = "SMNlmecfit",
   representation(

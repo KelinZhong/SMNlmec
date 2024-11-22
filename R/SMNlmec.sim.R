@@ -25,7 +25,6 @@
 #' \item{cc}{Vector of censoring indicators.}
 #' \item{y_cc}{Vector of responses censoring.}
 #' @examples
-#'
 #' p.cens <- 0.1
 #' m <- 50
 #' D <- matrix(c(0.049,0.001,0.001,0.002),2,2)

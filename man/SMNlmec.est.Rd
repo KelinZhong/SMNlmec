@@ -64,7 +64,6 @@ Return a S4 class SMNlmecfit object. Using function \code{SMNlmec.summary()} to 
 This function fits left, right censored mixed-effects linear model, with scale mixture of normal distribution errors, using the Stan. It returns estimates, standard errors and LPML, AIC, BIC and DIC.
 }
 \examples{
-
 \donttest{
 require(rstan)
 require(StanHeaders)
@@ -79,7 +78,16 @@ y1 <- c(log10(data1$RNA))
 cc <- (data1$RNAcens==1)+0
 y_com<-as.numeric(y1)
 rho_com<-as.numeric(cc)
-x <- cbind((data1$Fup==0)+0, (data1$Fup==1)+0, (data1$Fup==3)+0, (data1$Fup==6)+0, (data1$Fup==9)+0, (data1$Fup==12)+0, (data1$Fup==18)+0, (data1$Fup==24)+0)
+x <- cbind(
+ (data1$Fup==0)+0,
+ (data1$Fup==1)+0,
+ (data1$Fup==3)+0,
+ (data1$Fup==6)+0,
+ (data1$Fup==9)+0,
+ (data1$Fup==12)+0,
+ (data1$Fup==18)+0,
+ (data1$Fup==24)+0
+ )
 z <- matrix(rep(1, length(y1)), ncol=1)
 
 UTI_T_DEC <- SMNlmec.est(ID = data1$Patid, x_set = x, z_set = z,
@@ -95,5 +103,5 @@ SMNlmec.summary(UTI_T_DEC)
 
 }
 \references{
-Bayesian analysis of censored linear mixed-effects models for  heavy-tailed  irregularly observed repeated measures (Under review)
+Kelin Zhong, Fernanda L. Schumacher, Luis M. Castro and Victor H. Lachos. Bayesian analysis of censored linear mixed-effects models for heavy-tailed  irregularly observed repeated measures. Statistics in Medicine, 2025. doi:10.1002/sim.10295
 }

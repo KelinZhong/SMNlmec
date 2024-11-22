@@ -62,7 +62,6 @@ return list:
 Generating Censored UNC, DEC, CAR errors with Mixed Effects, for normal, student's-t and slash distribution.
 }
 \examples{
-
 p.cens <- 0.1
 m <- 50
 D <- matrix(c(0.049,0.001,0.001,0.002),2,2)

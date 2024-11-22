@@ -1,10 +1,10 @@
 
 
 #' @title Get a summary of results from SMNlmec.est.
+#' @docType methods
 #' @import rstan
 #' @param object An object of class \code{SMNlmecfit}.
-#' @examples
-#' See the example in SMNlmec.est.
+#' @return The summary of estimations, R hats, standard errors and 95% credible intervals of parameters. Model selection criterion.
 #' @exportMethod SMNlmec.summary
 setMethod("SMNlmec.summary","SMNlmecfit",function(object){
   temp_dist <- object@dist_set
