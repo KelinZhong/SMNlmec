@@ -29,9 +29,9 @@ SMNlmec.sim(
 
 \item{z}{Design matrix of the random effects of order\code{N x d}, corresponding to vector of random effects.}
 
-\item{tt}{Vector \code{1 x N} with the time the measurements were made, where \code{N} is the total number of measurements for all individuals.}
+\item{tt}{Vector \code{N x 1} with the time the measurements were made, where \code{N} is the total number of measurements for all individuals.}
 
-\item{nj}{Vector \code{1 x m} with the number of measurements of each individual, where \code{m} is the total number of individuals.}
+\item{nj}{Vector \code{m x 1} with the number of measurements of each individual, where \code{m} is the total number of individuals.}
 
 \item{beta}{Vector of values fixed effects.}
 

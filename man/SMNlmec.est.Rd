@@ -31,9 +31,9 @@ SMNlmec.est(
 
 \item{tt}{Vector \code{N x 1} with the time the measurements were made, where \code{N} is the total number of measurements for all individuals. Default it's considered regular times.}
 
-\item{y_complete}{Vector \code{1 x N} of the complete responses.}
+\item{y_complete}{Vector \code{N x 1} of the complete responses.}
 
-\item{censor_vector}{Vector \code{1 x N} of the indicator vector of censored responses.}
+\item{censor_vector}{Vector \code{N x 1} of the indicator vector of censored responses.}
 
 \item{dist}{Distribution of the random effects and random error. Available options are \code{Normal}, \code{Student} and \code{Slash}.}
 

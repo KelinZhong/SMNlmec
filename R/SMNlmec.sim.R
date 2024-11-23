@@ -2,15 +2,22 @@
 
 
 #' @title Generating Censored UNC, DEC, CAR errors with Mixed Effects, for normal, student's-t and slash distribution.
+#' @import rstan
+#' @import StanHeaders
 #' @import MASS
 #' @import tmvtnorm
-#' @import mvtnorm
+#' @import stats
 #' @import mnormt
+#' @importFrom mvtnorm pmvnorm dmvnorm rmvnorm dmvt
+#' @importFrom LaplacesDemon dmvn is.positive.definite as.inverse logdet
+#' @importFrom TruncatedNormal pmvt mvNcdf mvNqmc
+#' @importFrom numDeriv jacobian
+#' @import methods
 #' @param m Number of individuals.
 #' @param x Design matrix of the fixed effects of order \code{N x p}, corresponding to vector of fixed effects.
 #' @param z Design matrix of the random effects of order\code{N x d}, corresponding to vector of random effects.
-#' @param tt Vector \code{1 x N} with the time the measurements were made, where \code{N} is the total number of measurements for all individuals.
-#' @param nj Vector \code{1 x m} with the number of measurements of each individual, where \code{m} is the total number of individuals.
+#' @param tt Vector \code{N x 1} with the time the measurements were made, where \code{N} is the total number of measurements for all individuals.
+#' @param nj Vector \code{m x 1} with the number of measurements of each individual, where \code{m} is the total number of individuals.
 #' @param beta Vector of values fixed effects.
 #' @param sigma2 Values of the scalar of the variance matrix.
 #' @param D Variance matrix of the random effects of order \code{d x d}.

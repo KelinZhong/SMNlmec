@@ -8,15 +8,20 @@
 #' @import StanHeaders
 #' @import MASS
 #' @import tmvtnorm
-#' @import mvtnorm
 #' @import mnormt
+#' @import stats
+#' @importFrom mvtnorm pmvnorm dmvnorm rmvnorm dmvt
+#' @importFrom LaplacesDemon dmvn is.positive.definite as.inverse logdet
+#' @importFrom TruncatedNormal pmvt mvNcdf mvNqmc
+#' @importFrom numDeriv jacobian
+#' @import methods
 #' @description This function fits left, right censored mixed-effects linear model, with scale mixture of normal distribution errors, using the Stan. It returns estimates, standard errors and LPML, AIC, BIC and DIC.
 #' @param ID Vector \code{N x 1} of the ID of the data set, specifying the ID for each measurement.
 #' @param x_set Design matrix of the fixed effects of order \code{N x p}.
 #' @param z_set Design matrix of the random effects of order \code{N x d}.
 #' @param tt Vector \code{N x 1} with the time the measurements were made, where \code{N} is the total number of measurements for all individuals. Default it's considered regular times.
-#' @param y_complete Vector \code{1 x N} of the complete responses.
-#' @param censor_vector Vector \code{1 x N} of the indicator vector of censored responses.
+#' @param y_complete Vector \code{N x 1} of the complete responses.
+#' @param censor_vector Vector \code{N x 1} of the indicator vector of censored responses.
 #' @param dist Distribution of the random effects and random error. Available options are \code{Normal}, \code{Student} and \code{Slash}.
 #' @param struc Structure of the correlation structure. Available options are \code{UNC}, \code{DEC}, \code{CAR}.
 #' @param direction Direction of censoring type. Available options are \code{left} and \code{right}.
@@ -143,7 +148,7 @@ SMNlmec.est <- function(ID, x_set, z_set, tt, y_complete,
                          seed = seed_set, control = list(adapt_delta=adapt_delta_set))
 
         SMNlmec_criteria <- criteria(cc = rho_com, nj = nj, y = y_com, x = x, z = z,
-                              tt = tem, espac=5,
+                              tt = tt, espac=5,
                               stanobj = stan_obj, distr="Normal",
                               depstr = "UNC", cens.type="left",LI=NULL, LS=NULL)
 
@@ -162,7 +167,7 @@ SMNlmec.est <- function(ID, x_set, z_set, tt, y_complete,
                          seed = seed_set, control = list(adapt_delta=adapt_delta_set))
 
         SMNlmec_criteria <- criteria(cc = rho_com, nj = nj, y = y_com, x = x, z = z,
-                                     tt = tem, espac=5,
+                                     tt = tt, espac=5,
                                      stanobj = stan_obj, distr="Normal",
                                      depstr = "UNC", cens.type="right",LI=NULL, LS=NULL)
 
@@ -234,7 +239,7 @@ SMNlmec.est <- function(ID, x_set, z_set, tt, y_complete,
 
         SMNlmec_criteria <- criteria(cc = rho_com, nj = nj, y = y_com, x = x, z = z,
                                      tt = tt, espac=5,
-                                     stanobj = fit_stanCAR_N, distr="Normal",
+                                     stanobj = stan_obj, distr="Normal",
                                      depstr = "CAR", cens.type="left",LI=NULL, LS=NULL)
       }
 
@@ -256,7 +261,7 @@ SMNlmec.est <- function(ID, x_set, z_set, tt, y_complete,
 
         SMNlmec_criteria <- criteria(cc = rho_com, nj = nj, y = y_com, x = x, z = z,
                                      tt = tt, espac=5,
-                                     stanobj = fit_stanCAR_N, distr="Normal",
+                                     stanobj = stan_obj, distr="Normal",
                                      depstr = "CAR", cens.type="right",LI=NULL, LS=NULL)
 
       }
@@ -279,7 +284,7 @@ SMNlmec.est <- function(ID, x_set, z_set, tt, y_complete,
                          seed = seed_set, control = list(adapt_delta=adapt_delta_set))
 
         SMNlmec_criteria <- criteria(cc = rho_com, nj = nj, y = y_com, x = x, z = z,
-                              tt = tem, espac=5,
+                              tt = tt, espac=5,
                               stanobj = stan_obj, distr="Student",
                               depstr = "UNC", cens.type="left",LI=NULL, LS=NULL)
       }
@@ -297,7 +302,7 @@ SMNlmec.est <- function(ID, x_set, z_set, tt, y_complete,
                          seed = seed_set, control = list(adapt_delta=adapt_delta_set))
 
         SMNlmec_criteria <- criteria(cc = rho_com, nj = nj, y = y_com, x = x, z = z,
-                                     tt = tem, espac=5,
+                                     tt = tt, espac=5,
                                      stanobj = stan_obj, distr="Student",
                                      depstr = "UNC", cens.type="right",LI=NULL, LS=NULL)
       }
@@ -408,7 +413,7 @@ SMNlmec.est <- function(ID, x_set, z_set, tt, y_complete,
                                seed = seed_set, control = list(adapt_delta=adapt_delta_set))
 
         SMNlmec_criteria <- criteria(cc = rho_com, nj = nj, y = y_com, x = x, z = z,
-                               tt = tem, espac=5,
+                               tt = tt, espac=5,
                                stanobj = stan_obj, distr="Slash",
                                depstr = "UNC", cens.type="left",LI=NULL, LS=NULL)
 
@@ -427,7 +432,7 @@ SMNlmec.est <- function(ID, x_set, z_set, tt, y_complete,
                          seed = seed_set, control = list(adapt_delta=adapt_delta_set))
 
         SMNlmec_criteria <- criteria(cc = rho_com, nj = nj, y = y_com, x = x, z = z,
-                                     tt = tem, espac=5,
+                                     tt = tt, espac=5,
                                      stanobj = stan_obj, distr="Slash",
                                      depstr = "UNC", cens.type="right",LI=NULL, LS=NULL)
 

@@ -61,7 +61,7 @@ grafSL<-function(y0,mu0,sigma0,Qc,muc,sigmac,nu){
 
 VerCensLMM <- function(cc, nj, y, x, z, beta1, sigmae, DD, tt, phi=NULL, nu=NULL, distr="Normal", cens.type="left", depstr = "UNC",LI=NULL,LS=NULL){
 
-  GB = GenzBretz(maxpts = 5e4, abseps = 1e-9, releps = 0)
+  GB = mvtnorm::GenzBretz(maxpts = 5e4, abseps = 1e-9, releps = 0)
 
   m<-length(nj)[1]
 
