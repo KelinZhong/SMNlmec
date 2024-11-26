@@ -3,9 +3,9 @@
 \docType{class}
 \name{SMNlmecfit-class}
 \alias{SMNlmecfit-class}
-\title{SMNlmecfit}
+\title{SMNlmecfit Class}
 \description{
-SMNlmecfit
+SMNlmecfit Class
 }
 \section{Slots}{
 

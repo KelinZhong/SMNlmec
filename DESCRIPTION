@@ -1,6 +1,6 @@
 Package: SMNlmec
 Type: Package
-Title: Scale mixture of normal distribution in linear mixed-effects censored model with UNC, DEC, CAR correaltion structure
+Title: Scale Mixture of Normal Distribution in Linear Mixed-Effects Model
 Version: 0.1.0
 Authors@R: c(
   person("Kelin", "Zhong", email = "kelin.zhong@uconn.edu", role = c("aut", "cre")),
@@ -9,7 +9,7 @@ Authors@R: c(
   person("Victor H.", "Lachos", email = "hlachos@uconn.edu", role = c("aut")),
   person("Jalmar M.F.", "Carrasco", email = "carrascojalmar@gmail.com", role = c("aut")))
 Maintainer: Kelin Zhong <kelin.zhong@uconn.edu>
-Description: Bayesian analysis of censored linear mixed-effects models that replace Gaussian assumptions with a flexible class of distributions, such as the scale mixture of normal family distributions, considering a damped exponential correlation structure which was employed to account for within-subject autocorrelation among irregularly observed measures. For more details, see Kelin Zhong, Fernanda L. Schumacher, Luis M. Castro and Victor H. Lachos (2025) <doi:10.1002/sim.10295>.
+Description: Bayesian analysis of censored linear mixed-effects models that replace Gaussian assumptions with a flexible class of distributions, such as the scale mixture of normal family distributions, considering a damped exponential correlation structure which was employed to account for within-subject autocorrelation among irregularly observed measures. For more details, see Zhong et al. (2025, forthcoming in Statistics in Medicine).
 Depends: R (>= 4.2)
 Imports: 
   rstan (>= 2.26.23), 
@@ -18,8 +18,8 @@ Imports:
   tmvtnorm (>= 1.5), 
   mvtnorm (>= 1.2-3), 
   mnormt (>= 2.1.1),
-  methods (>= 4.2.2), 
-  stats (>= 4.2.2),
+  methods, 
+  stats,
   LaplacesDemon (>= 16.1.6),
   TruncatedNormal (>= 2.2.2),
   numDeriv (>= 2016.8-1.1)

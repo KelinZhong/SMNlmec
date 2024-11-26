@@ -3,7 +3,7 @@
 \name{SMNlmec.summary}
 \alias{SMNlmec.summary}
 \alias{SMNlmec.summary,SMNlmecfit-method}
-\title{Summary Method for SMNlmecfit Class}
+\title{SMNlmecfit Summary}
 \usage{
 SMNlmec.summary(object)
 

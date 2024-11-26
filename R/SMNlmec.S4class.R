@@ -4,7 +4,7 @@
 
 
 
-#' @title SMNlmecfit
+#' @title SMNlmecfit Class
 #' @slot stan_object stanfit object from rstan.
 #' @slot model_criteria list, model selection criteria.
 #' @slot dist_set character, the name of distribution.
@@ -20,13 +20,18 @@ setClass(
   )
 )
 
-#' @title Creator Function for SMNlmecfit Class
+#' @title Create SMNlmecfit Objects
 #' @description A function to create objects of class \code{SMNlmecfit}.
 #' @name SMNlmecfit.creator
 #' @param stan_object stanfit object from rstan.
 #' @param model_criteria list, model selection criteria.
 #' @param dist_set character, the name of distribution.
 #' @param struc_set character, the name of correlation structure.
+#' @return A SMNlmecfit object containing:
+#' \item{stan_object}{A stanfit object from rstan::stan().}
+#' \item{model_criteria}{A list includes LPML, DIC, EAIC, EBIC, K-L divergence.}
+#' \item{dist_set}{The setting of distribution of the stan model.}
+#' \item{struc_set}{The setting of correlation structure of the stan model.}
 #' @export
 SMNlmecfit.creator <- function(stan_object, model_criteria, dist_set, struc_set){
 
@@ -52,7 +57,7 @@ SMNlmecfit.creator <- function(stan_object, model_criteria, dist_set, struc_set)
 
 
 
-#' @title Summary Method for SMNlmecfit Class
+#' @title SMNlmecfit Summary
 #' @description A generic function to provide a summary for objects of class \code{SMNlmecfit}.
 #' @param object An object of class \code{SMNlmecfit}.
 #' @return A summary of model estimations, R-hats, standard errors, and criteria.
