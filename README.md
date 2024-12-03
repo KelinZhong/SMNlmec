@@ -12,10 +12,4 @@ Article: Bayesian analysis of censored linear mixed-effects models for heavy-tai
 
 Journal: Statistics in Medicine
 
-To install this package, try the following command in R.
 
-```r
-library(devtools)
-
-devtools::install_github("KelinZhong/SMNlmec")
-```
