@@ -43,9 +43,9 @@ SMNlmec.est(
 
 \item{thin_num}{A positive integer specifying the period for saving samples. The default is 5. See more details in rstan::stan().}
 
-\item{chains_num}{A positive integer specifying the number of chains generating by rstan::stan(). The default is 3.}
+\item{chains_num}{A positive integer specifying the number of chains generating by rstan::stan(). The default is 1.}
 
-\item{iter_num}{A positive integer specifying the number of iterations for each chain (including warmup). The default is 5000.}
+\item{iter_num}{A positive integer specifying the number of iterations for each chain (including warmup). The default is 3000.}
 
 \item{burn_percen}{A percentage of the warm-up iterations in each chain the Stan. The default is 0.1.}
 
