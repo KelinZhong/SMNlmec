@@ -3,7 +3,7 @@ Type: Package
 Title: Scale Mixture of Normal Distribution in Linear Mixed-Effects Model
 Version: 1.0.1
 Authors@R: c(
-  person("Kelin", "Zhong", email = "kelin.zhong@uconn.edu", role = c("aut", "cre")),
+  person("Kelin", "Zhong", email = "kelinzhonguconn@gmail.com", role = c("aut", "cre")),
   person("Fernanda L.", "Schumacher", email = "schumacher.313@osu.edu", role = c("aut")),
   person("Luis M.", "Castro", email = "lmcastro@uc.cl", role = c("aut")),
   person("Victor H.", "Lachos", email = "hlachos@uconn.edu", role = c("aut")),
