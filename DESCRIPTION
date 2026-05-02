@@ -1,7 +1,7 @@
 Package: SMNlmec
 Type: Package
 Title: Scale Mixture of Normal Distribution in Linear Mixed-Effects Model
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
   person("Kelin", "Zhong", email = "kelinzhonguconn@gmail.com", role = c("aut", "cre")),
   person("Fernanda L.", "Schumacher", email = "schumacher.313@osu.edu", role = c("aut")),

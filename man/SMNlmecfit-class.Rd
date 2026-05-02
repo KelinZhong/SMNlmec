@@ -3,9 +3,10 @@
 \docType{class}
 \name{SMNlmecfit-class}
 \alias{SMNlmecfit-class}
-\title{SMNlmecfit Class}
+\title{Fitted SMNlmec Model Object}
 \description{
-SMNlmecfit Class
+An S4 class returned by \code{SMNlmec.est()}.
+Users usually do not need to create objects of this class directly.
 }
 \section{Slots}{
 
